@@ -31,12 +31,20 @@ namespace MoodAnalyzerProg
             else return "HAPPY";
 
         }
+        //UC-2 Using Try Catch Blocks to Handle Null Exception.
         public string AnalyseMood()
         {
-            if (message.ToLower().Contains("sad"))
-                return "SAD";
+            try
+            {
+                if (message.ToLower().Contains("sad"))
+                    return "SAD";
+                else return "HAPPY";
+            }
+            catch (NullReferenceException)
+            {
+                return "HAPPY";
+            }
 
-            else return "HAPPY";
         }
 
     }
