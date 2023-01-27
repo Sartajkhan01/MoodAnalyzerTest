@@ -6,46 +6,39 @@ using System.Threading.Tasks;
 
 namespace MoodAnalyzerProg
 {
-    public class MoodAnalyser
+    public class MoodAnalysis
     {
         public string message;
-        /// <summary>
-        /// Default Constructor
-        /// </summary>
-        public MoodAnalyser()
-        {
 
-        }
-        /// <summary>
-        /// Parameterised Constructor
-        /// </summary>
-        public MoodAnalyser(string message)
+        public MoodAnalysis()
         {
-            this.message = message.ToUpper();
+            Console.WriteLine("Default Constructor");
         }
-        public string AnalyseMoodWithoutConstructor(string message)
+        public MoodAnalysis(string message)//constructor
         {
-            if (message.ToLower().Contains("sad"))
-                return "SAD";
-
-            else return "HAPPY";
-
+            this.message = message;
         }
-        //UC-2 Using Try Catch Blocks to Handle Null Exception.
-        public string AnalyseMood()
+        public string AnalyseMood() //method to analyse mood
         {
             try
             {
-                if (message.ToLower().Contains("sad"))
+                if (this.message.Equals(""))
+                {
+                    throw new CustomException(CustomException.ExceptionType.EMPTY_MOOD, "Mood should not be empty");
+                }
+                else if (this.message.ToLower().Contains("sad"))
+                {
                     return "SAD";
-                else return "HAPPY";
+                }
+                else
+                {
+                    return "HAPPY";
+                }
             }
             catch (NullReferenceException)
             {
-                return "HAPPY";
+                throw new CustomException(CustomException.ExceptionType.NULL_MOOD, "Mood should not be null");
             }
-
         }
-
     }
 }
